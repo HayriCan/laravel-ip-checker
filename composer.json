@@ -1,8 +1,7 @@
 {
     "name": "hayrican/ipchecker",
     "description": "Laravel package for providing restricted access by IP Address to your application",
-    "homepage": "",
-    "version": "",
+    "homepage": "https://github.com/HayriCan/laravel-ip-checker",
     "keywords": [
         "laravel",
         "ip address",
