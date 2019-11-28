@@ -1,0 +1,39 @@
+{
+    "name": "hayrican/ipchecker",
+    "description": "Laravel package for providing restricted access by IP Address to your application",
+    "homepage": "",
+    "version": "",
+    "keywords": [
+        "laravel",
+        "ip address",
+        "restricted",
+        "access",
+        "helper",
+        "php7"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "hayrican",
+            "email": "hayricanbarcin@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "ext-json": "*",
+        "ext-simplexml": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "HayriCan\\IpChecker\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "HayriCan\\IpChecker\\IpCheckerServiceProvider"
+            ]
+        }
+    }
+}
