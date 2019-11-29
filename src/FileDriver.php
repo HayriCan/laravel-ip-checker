@@ -64,9 +64,9 @@ class FileDriver implements IpCheckerInterface
                 }
             }
             return collect($this->ipList);
-        } else {
-            return [];
         }
+
+        return [];
     }
 
     /**
