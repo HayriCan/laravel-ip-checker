@@ -24,12 +24,15 @@ class IpChecker
     public function handle($request, Closure $next)
     {
         if (!in_array($request->ip(), $this->allowedIps->getIpArray())) {
-            $return_array = array(
-                'success'=>false,
-                'code'=>250,
-                'message'=>'Your IP Address not in the list.',
-            );
-            return response()->json($return_array,250,[],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+            if (in_array(config('ipchecker.api_middleware'),$request->route()->gatherMiddleware())){
+                $return_array = config('ipchecker.api_response');
+
+                return response()->json($return_array,250,[],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+            }
+
+            $message = config('ipchecker.web_response');
+
+            return response()->view('ipchecker::error',compact('message'));
         }
 
         return $next($request);

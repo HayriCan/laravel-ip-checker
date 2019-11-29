@@ -20,8 +20,8 @@ class IpCheckerController extends Controller
         if (config('ipchecker.settings.auth')) {
             $this->middleware(['web','auth']);
         }
-        elseif(config('ipchecker.settings.middleware')){
-            $this->middleware(config('ipchecker.settings.middleware'));
+        else{
+            $this->middleware(['web']);
         }
     }
 
@@ -80,5 +80,4 @@ class IpCheckerController extends Controller
 
         return redirect()->back();
     }
-    
 }

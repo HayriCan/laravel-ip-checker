@@ -29,7 +29,9 @@ class IpCheckerServiceProvider extends ServiceProvider
         $this->loadConfig();
         $this->loadRoutes();
         $this->loadViews();
-        $this->loadMigrations();
+        if (config('ipchecker.driver') === 'db'){
+            $this->loadMigrations();
+        }
     }
 
     public function bindServices(){
@@ -55,7 +57,7 @@ class IpCheckerServiceProvider extends ServiceProvider
     public function loadConfig(){
         $this->publishes([
             __DIR__ . '/../config/ipchecker.php' => config_path('ipchecker.php')
-        ], 'config');
+        ], 'ipchecker');
     }
 
     public function loadRoutes(){
