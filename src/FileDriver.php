@@ -110,10 +110,9 @@ class FileDriver implements IpCheckerInterface
                 }
             }
             return false;
-        } else {
-            return false;
         }
 
+        return false;
     }
 
     /**
