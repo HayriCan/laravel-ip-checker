@@ -14,5 +14,5 @@ interface IpCheckerInterface{
 
     public function saveIp($array);
 
-    public function deleteIp($ip);
+    public function deleteIp($ipAddress);
 }

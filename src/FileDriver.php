@@ -88,19 +88,19 @@ class FileDriver implements IpCheckerInterface
     }
 
     /**
-     * @param $ip
+     * @param $ipAddress
      * @return bool
      */
-    public function deleteIp($ip)
+    public function deleteIp($ipAddress)
     {
         if (is_dir($this->path)) {
             $files = scandir($this->path);
 
-            foreach ($files as $key=>$file) {
+            foreach ($files as $file) {
                 if (!is_dir($file)) {
                     $lines = file($this->path.DIRECTORY_SEPARATOR.$file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
                     foreach ($lines as $line) {
-                        if (strpos($line, $ip)){
+                        if (strpos($line, $ipAddress)){
                             $contents = file_get_contents($this->path.DIRECTORY_SEPARATOR.$file);
                             $contents = str_replace($line,'',$contents);
                             file_put_contents($this->path.DIRECTORY_SEPARATOR.$file,$contents);

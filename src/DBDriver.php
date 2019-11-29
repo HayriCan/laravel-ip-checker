@@ -55,15 +55,15 @@ class DBDriver implements IpCheckerInterface{
     }
 
     /**
-     * @param $ip
+     * @param $ipAddress
      * @return bool
      */
-    public function deleteIp($ip)
+    public function deleteIp($ipAddress)
     {
         $response = false;
-        $ipList = IpList::where('ip',$ip)->first();
+        $ipList = IpList::where('ip',$ipAddress)->first();
         if ($ipList){
-            IpList::destroy($ipList->id);
+            IpList::where('id',$ipList->id)->delete();
             $response = true;
         }
 

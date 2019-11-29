@@ -19,10 +19,9 @@ class IpCheckerController extends Controller
     {
         if (config('ipchecker.settings.auth')) {
             $this->middleware(['web','auth']);
-        }else{
-            if(config('ipchecker.settings.middleware')){
-                $this->middleware(config('ipchecker.settings.middleware'));
-            }
+        }
+        elseif(config('ipchecker.settings.middleware')){
+            $this->middleware(config('ipchecker.settings.middleware'));
         }
     }
 
@@ -38,9 +37,6 @@ class IpCheckerController extends Controller
 
         if(count($iplist)>0){
             $iplist = $iplist->sortByDesc('created_at');
-        }
-        else{
-            $iplist = [];
         }
 
         return view('ipchecker::index',compact('iplist'));
