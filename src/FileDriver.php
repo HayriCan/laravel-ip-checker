@@ -41,9 +41,9 @@ class FileDriver implements IpCheckerInterface
             $ipList = $this->ipList ?? [];
 
             return $ipList;
-        } else {
-            return [];
         }
+
+        return [];
     }
 
     /**
