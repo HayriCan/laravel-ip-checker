@@ -34,7 +34,7 @@ You should publish vendor for configuration file.
 $ php artisan vendor:publish --tag="ipchecker"
 ```
 
-####Driver
+##### Driver
 The config file is called *ipchecker.php*. Currently supported drivers are `db` and `file`
 
 Default driver is `file` and ipchecker will use file to record ip addresses. But if you want to use Database for records, migrate table by using
@@ -44,7 +44,7 @@ php artisan migrate
 ```
 You have to change driver to `db` before migrate. Otherwise it will not migrate the table.
 
-####Route Group Middleware
+##### Route Group Middleware
 ```php
 'api_middleware'=>'api',
 'web_middleware'=>'web',
@@ -52,7 +52,7 @@ You have to change driver to `db` before migrate. Otherwise it will not migrate 
 If your routes has different middleware then these default values you can change them in here.
 These route middleware need for filtering response of denial access.
 
-####Denied Access Response
+##### Denied Access Response
 ```php
 'api_response'=>[
     'success'=>false,
