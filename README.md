@@ -8,7 +8,7 @@
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/HayriCan/laravel-ip-checker/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 [![License](https://poser.pugx.org/hayrican/ipchecker/license)](https://packagist.org/packages/hayrican/ipchecker)
 
-This package provides restricted access by IP Address to your application.
+This package provides restricted access via IP Address to your application.
 
 ## Installation
 To get started, you should add the `hayrican/ipchecker` Composer dependency to your project:
