@@ -3,9 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="author" content="Hayri Can BARÇIN">
     <title>@yield('title')</title>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -35,14 +34,25 @@
             position: relative;
         }
 
-        .message {
+        .code {
+            border-right: 2px solid;
             font-size: xx-large;
+            padding: 0 15px 0 15px;
+            text-align: center;
+        }
+
+        .message {
+            font-size: x-large;
             text-align: center;
         }
     </style>
 </head>
 <body>
 <div class="flex-center position-ref full-height">
+    <div class="code">
+        {{$code}}
+    </div>
+
     <div class="message" style="padding: 10px;">
         {{$message}}
     </div>

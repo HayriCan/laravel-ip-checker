@@ -1,16 +1,12 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the 'web' middleware group. Now create something great!
-|
-*/
-
+/**
+ * Laravel IP Checker
+ *
+ * @author    Hayri Can BARÇIN <hayricanbarcin (#) gmail (.) com>
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ * @link      https://github.com/HayriCan/laravel-ip-checker
+ */
 
 Route::group(['prefix'=>config('ipchecker.settings.route_prefix')], function () {
     Route::get('/iplists', 'HayriCan\IpChecker\Http\Controllers\IpCheckerController@index')->name('iplist.index');

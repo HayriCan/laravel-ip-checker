@@ -2,10 +2,17 @@
 
 namespace HayriCan\IpChecker\Http\Controllers;
 
+/**
+ * Laravel IP Checker
+ *
+ * @author    Hayri Can BARÇIN <hayricanbarcin (#) gmail (.) com>
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ * @link      https://github.com/HayriCan/laravel-ip-checker
+ */
+
 use HayriCan\IpChecker\Contracts\IpCheckerInterface;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class IpCheckerController extends Controller
@@ -17,11 +24,9 @@ class IpCheckerController extends Controller
      */
     public function __construct()
     {
+        $this->middleware(['web']);
         if (config('ipchecker.settings.auth')) {
             $this->middleware(['web','auth']);
-        }
-        else{
-            $this->middleware(['web']);
         }
     }
 
@@ -60,13 +65,17 @@ class IpCheckerController extends Controller
             return redirect()->back()->withErrors($validator->errors());
         }
 
-        $ipchecker->saveIp(array(
-            'group'=>$request->input('group'),
-            'definition'=>$request->input('definition'),
-            'ip'=>$request->input('ip'),
-        ));
+        if (!in_array($request->input('ip'),$ipchecker->getIpArray())){
+            $ipchecker->saveIp(array(
+                'group'=>$request->input('group'),
+                'definition'=>$request->input('definition'),
+                'ip'=>$request->input('ip'),
+            ));
 
-        return redirect()->back();
+            return redirect()->back()->with('success',trans('ipchecker::messages.ip_success'));
+        }
+
+        return redirect()->back()->with('error',trans('ipchecker::messages.ip_error'));
     }
 
     /**
@@ -78,6 +87,6 @@ class IpCheckerController extends Controller
     {
         $ipchecker->deleteIp($request->input('ipAddress'));
 
-        return redirect()->back();
+        return redirect()->back()->with('info',trans('ipchecker::messages.ip_delete'));
     }
 }

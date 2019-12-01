@@ -3,13 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
+    <meta name="author" content="Hayri Can BARÇIN">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', 'APILogger') }}</title>
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-
     <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -151,14 +148,35 @@
         <main class="py-4">
             <div class="container">
                 <div class="w-100 d-flex justify-content-between">
-                    <h3 class="text-center">IP List</h3>
+                    <h3 class="text-center">{{trans('ipchecker::messages.ip_list')}}</h3>
                     <div class="form-group">
                         <button class="btn btn-success font-weight-bold btn-block"
                                 data-toggle="modal" data-target="#add">
-                            ADD IP ADDRESS
+                            {{trans('ipchecker::messages.add_ip')}}
                         </button>
                     </div>
                 </div>
+                @if ($message = \Session::get('success'))
+                    <div class="alert alert-success alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @endif
+
+                @if ($message = \Session::get('error'))
+                    <div class="alert alert-danger alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @endif
+
+                @if ($message = \Session::get('info'))
+                    <div class="alert alert-info alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @endif
+
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -172,20 +190,20 @@
                     @forelse ($iplist as $key => $ip)
                         <div class="list-group-item list-group-item-action mt-2">
                             <div class="row w-100">
-                                <h5 class="col-md-2 pt-2"><b>Group : </b> {{$ip->group}}</h5>
-                                <h5 class="col-md-5 pt-2"><b>Description : </b> {{$ip->definition}}</h5>
+                                <h5 class="col-md-2 pt-2"><b>{{trans('ipchecker::messages.group')}} : </b> {{$ip->group}}</h5>
+                                <h5 class="col-md-5 pt-2"><b>{{trans('ipchecker::messages.definition')}} : </b> {{$ip->definition}}</h5>
                                 <h5 class="col-md-3 pt-2"><b>IP :</b> {{$ip->ip}}</h5>
                                 <span class="col-md-2" style="padding:0">
                                 <button class="btn btn-danger font-weight-bold btn-block"
                                         data-toggle="modal" data-target="#delete" data-ip="{{$ip->ip}}">
-                                    DELETE
+                                    {{trans('ipchecker::messages.delete')}}
                                 </button>
                             </span>
                             </div>
                         </div>
                     @empty
                         <h5>
-                            No Records
+                            {{trans('ipchecker::messages.no_record')}}
                         </h5>
                     @endforelse
                 </div>
@@ -196,26 +214,26 @@
             <div class="modal-dialog modal-confirm-add">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Add Ip Address</h4>
+                        <h4 class="modal-title">{{trans('ipchecker::messages.add_ip')}}</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
                         <form action="{{route('iplist.add')}}" method="POST">
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <label for="group">Group</label>
+                                <label for="group">{{trans('ipchecker::messages.group')}}</label>
                                 <input type="text" class="form-control" id="group" name="group">
                             </div>
                             <div class="form-group">
-                                <label for="definition">Definition</label>
+                                <label for="definition">{{trans('ipchecker::messages.definition')}}</label>
                                 <input type="text" class="form-control" id="definition" name="definition">
                             </div>
                             <div class="form-group">
-                                <label for="ip">Ip Address</label>
+                                <label for="ip">{{trans('ipchecker::messages.ip_address')}}</label>
                                 <input type="text" class="form-control" id="ip" name="ip">
                             </div>
-                            <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-success">Save</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">{{trans('ipchecker::messages.cancel')}}</button>
+                            <button type="submit" class="btn btn-primary">{{trans('ipchecker::messages.save')}}</button>
                         </form>
                     </div>
                 </div>
@@ -229,19 +247,19 @@
                         <div class="icon-box" style="display: block">
                             <i class="material-icons">&#xE5CD;</i>
                         </div>
-                        <h4 class="modal-title">Are you sure?</h4>
+                        <h4 class="modal-title">{{trans('ipchecker::messages.delete_title')}}</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <p>Do you really want to delete these ip address? This process cannot be undone.</p>
+                        <p>{{trans('ipchecker::messages.delete_body')}}</p>
                     </div>
                     <div class="modal-footer">
                         <form action="{{route('iplist.delete')}}" method="POST">
                             {{ method_field('DELETE') }}
                             {{ csrf_field() }}
                             <input type="hidden" id="ipAddress" name="ipAddress" value="">
-                            <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="button" class="btn btn-info" data-dismiss="modal">{{trans('ipchecker::messages.cancel')}}</button>
+                            <button type="submit" class="btn btn-danger">{{trans('ipchecker::messages.delete')}}</button>
                         </form>
 
                     </div>

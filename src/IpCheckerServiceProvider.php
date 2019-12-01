@@ -2,12 +2,20 @@
 
 namespace HayriCan\IpChecker;
 
-use AWT\FileLogger;
+/**
+ * Laravel IP Checker
+ *
+ * @author    Hayri Can BARÇIN <hayricanbarcin (#) gmail (.) com>
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ * @link      https://github.com/HayriCan/laravel-ip-checker
+ */
+
 use Exception;
 use HayriCan\IpChecker\Contracts\IpCheckerInterface;
-use HayriCan\IpChecker\DBDriver;
 use HayriCan\IpChecker\Http\Middleware\IpChecker;
 use Illuminate\Support\ServiceProvider;
+use HayriCan\IpChecker\DBDriver;
+use HayriCan\IpChecker\FileDriver;
 
 class IpCheckerServiceProvider extends ServiceProvider
 {
@@ -32,6 +40,7 @@ class IpCheckerServiceProvider extends ServiceProvider
         if (config('ipchecker.driver') === 'db'){
             $this->loadMigrations();
         }
+        $this->loadTranslation();
     }
 
     public function bindServices(){
@@ -70,6 +79,14 @@ class IpCheckerServiceProvider extends ServiceProvider
 
     public function loadMigrations(){
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+    }
+
+    public function loadTranslation(){
+        $this->loadTranslationsFrom(__DIR__ . '/lang', 'ipchecker');
+
+        $this->publishes([
+            __DIR__ . '/lang' => resource_path('lang/vendor/ipchecker'),
+        ], 'ipchecker');
     }
 
 }

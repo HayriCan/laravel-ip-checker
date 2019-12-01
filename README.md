@@ -52,19 +52,9 @@ You have to change driver to `db` before migrate. Otherwise it will not migrate 
 If your routes has different middleware then these default values you can change them in here.
 These route middleware need for filtering response of denial access.
 
-##### Denied Access Response
-```php
-'api_response'=>[
-    'success'=>false,
-    'code'=>250,
-    'message'=>'Your IP Address not in the list.',
-],
+## Localization
+When you call ``php artisan vendor:publish --tag="ipchecker"`` command, it will also publish `lang` file to your `resources/lang` directory. You can change all fields as you desire.
 
-'web_response'=>'Your IP Address not in the list.',
-```
-Api response will be json so you can change response array from 'api_response',
-
-Web response is a view and you can change it's message.
 
 # Package Usage
 ## 1.Add Middleware

@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Laravel IP Checker
+ *
+ * @author    Hayri Can BARÇIN <hayricanbarcin (#) gmail (.) com>
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ * @link      https://github.com/HayriCan/laravel-ip-checker
+ */
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;

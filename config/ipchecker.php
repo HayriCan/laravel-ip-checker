@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Laravel IP Checker
+ *
+ * @author    Hayri Can BARÇIN <hayricanbarcin (#) gmail (.) com>
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ * @link      https://github.com/HayriCan/laravel-ip-checker
+ */
 
 return [
 
@@ -50,26 +57,5 @@ return [
 
     'api_middleware'=>'api',
     'web_middleware'=>'web',
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Denied Access Response
-    |--------------------------------------------------------------------------
-    | Api request denial response will be json, web request denial will be view.
-    | You can change the array of api response and you can change message of error page for web response
-    |
-    */
-
-
-    'api_response'=>[
-        'success'=>false,
-        'code'=>250,
-        'message'=>'Your IP Address not in the list.',
-    ],
-
-    'web_response'=>'Your IP Address not in the list.',
-
-
 
 ];

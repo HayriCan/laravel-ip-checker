@@ -2,6 +2,14 @@
 
 namespace HayriCan\IpChecker\Http\Middleware;
 
+/**
+ * Laravel IP Checker
+ *
+ * @author    Hayri Can BARÇIN <hayricanbarcin (#) gmail (.) com>
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ * @link      https://github.com/HayriCan/laravel-ip-checker
+ */
+
 use HayriCan\IpChecker\Contracts\IpCheckerInterface;
 use Closure;
 
@@ -24,15 +32,20 @@ class IpChecker
     public function handle($request, Closure $next)
     {
         if (!in_array($request->ip(), $this->allowedIps->getIpArray())) {
-            if (in_array(config('ipchecker.api_middleware'),$request->route()->gatherMiddleware())){
-                $return_array = config('ipchecker.api_response');
+            $code = trans('ipchecker::messages.denied_access.code');
+            $message = trans('ipchecker::messages.denied_access.message');
 
-                return response()->json($return_array,250,[],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+            if (in_array(config('ipchecker.api_middleware'),$request->route()->gatherMiddleware())){
+                $return_array = [
+                    'success'=>false,
+                    'code'=>$code,
+                    'message'=>$message,
+                ];
+
+                return response()->json($return_array,200,[],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
             }
 
-            $message = config('ipchecker.web_response');
-
-            return response()->view('ipchecker::error',compact('message'));
+            return response()->view('ipchecker::error',compact('message','code'));
         }
 
         return $next($request);

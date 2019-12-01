@@ -2,8 +2,15 @@
 
 namespace HayriCan\IpChecker;
 
+/**
+ * Laravel IP Checker
+ *
+ * @author    Hayri Can BARÇIN <hayricanbarcin (#) gmail (.) com>
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ * @link      https://github.com/HayriCan/laravel-ip-checker
+ */
+
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use HayriCan\IpChecker\Contracts\IpCheckerInterface;
 
