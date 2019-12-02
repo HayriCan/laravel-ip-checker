@@ -27,12 +27,16 @@ class IpCheckerController extends Controller
     {
         $this->middleware(['web']);
         if (config('ipchecker.settings.auth')) {
-            if (!empty(config('ipchecker.settings.admin_id'))){
-                if (!in_array(Auth::id(),config('ipchecker.settings.admin_id'))){
-                    return abort(404);
-                }
-            }
             $this->middleware(['web','auth']);
+            $this->middleware(function ($request, $next) {
+                if (!empty(config('ipchecker.settings.admin_id'))){
+                    if (!in_array(Auth::id(),config('ipchecker.settings.admin_id'))){
+                        return abort(404);
+                    }
+                }
+
+                return $next($request);
+            });
         }
     }
 
