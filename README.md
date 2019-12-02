@@ -85,18 +85,29 @@ Up to default config dashboard can be accessible via ***yourdomain.com/iplists**
 
 ```php
 {
- 'settings'       => [
-        'auth'       => false,
-        'middleware' => [
-            'web',
-        ],
-        "route_prefix"=> "",
+"settings"=>[
+    "auth"       => false,
+    "admin_id"=>[],
+    "route_prefix"=> "",
     ],
 }
 ``` 
 
-If you want to guard this page just change 'auth' to `true` and it require 'auth' middleware. 
-Also you can change the route prefix of this dashboard. If you change  'route_prefix' to `"foo"` your dashboard will be accessible via ***yourdomain.com/foo/iplists***.
+If you want to guard this page just change `"auth"` to `true` and it require `"auth"` middleware.
+
+When you enabled auth you could add admin users id to ``"admin_id"`` array.
+If leave ``"admin_id"`` array empty, all users can has access to IP Checker dashboard  
+ ```php
+{
+"settings"=>[
+    "auth"=> true,
+    "admin_id"=>[2,5],
+    "route_prefix"=> "",
+    ],
+}
+ ``` 
+
+Also you can change the route prefix of this dashboard. If you change  `"route_prefix"` to `"foo"` your dashboard will be accessible via ***yourdomain.com/foo/iplists***.
  
 
 

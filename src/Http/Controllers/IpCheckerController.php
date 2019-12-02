@@ -13,6 +13,7 @@ namespace HayriCan\IpChecker\Http\Controllers;
 use HayriCan\IpChecker\Contracts\IpCheckerInterface;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class IpCheckerController extends Controller
@@ -26,6 +27,11 @@ class IpCheckerController extends Controller
     {
         $this->middleware(['web']);
         if (config('ipchecker.settings.auth')) {
+            if (!empty(config('ipchecker.settings.admin_id'))){
+                if (!in_array(Auth::id(),config('ipchecker.settings.admin_id'))){
+                    return abort(404);
+                }
+            }
             $this->middleware(['web','auth']);
         }
     }
